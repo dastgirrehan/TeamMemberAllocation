@@ -3,12 +3,13 @@ import Header from './Header';
 import Employees from './Employees';
 import Footer from './Footer';
 import { useState } from 'react';
+import { useEffect } from 'react';
 
 export default function App() {
 
-  const [ selectedTeam, setTeam ] = useState("TeamB")
+  const [ selectedTeam, setTeam ] = useState(JSON.parse(localStorage.getItem('selectedTeam')) || "TeamB");
 
-  const [employees, setEmployees] = useState([ 
+  const [employees, setEmployees] = useState(JSON.parse(localStorage.getItem('employeeList')) || [ 
                 {id: 1, fullName: "Employee1", designation: "Developer1", gender: "male", teamName: "TeamA"},
                 {id: 2, fullName: "Employee2", designation: "Developer2", gender: "female", teamName: "TeamA"},
                 {id: 3, fullName: "Employee3", designation: "Developer3", gender: "male", teamName: "TeamA"},
@@ -23,6 +24,14 @@ export default function App() {
                 {id: 12, fullName: "Employee12", designation: "Developer12", gender: "male", teamName: "TeamD"},
         ]);
 
+  useEffect(() => {
+    localStorage.setItem('employeeList', JSON.stringify(employees));
+  }, [employees]);
+
+  useEffect(() =>{
+    localStorage.setItem('selectedTeam', JSON.stringify(selectedTeam));
+  }, [selectedTeam]);
+  
   function handleTeamSelectionChange(event){
 
     console.log(event.target.value);
