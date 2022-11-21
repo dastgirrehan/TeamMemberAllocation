@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 const GroupedTeamMembers = ({employees, selectedTeam, setTeam}) => {
 
-  const [groupedEmployees, setGroupData] = useState(groupTeamMembers());
+  const [groupedEmployees, setGroupedData] = useState(groupTeamMembers());
 
   function groupTeamMembers(){
     var teams = [];
@@ -23,6 +23,7 @@ const GroupedTeamMembers = ({employees, selectedTeam, setTeam}) => {
     var teamD = { team: 'TeamD', members: teamDMembers, collapsed: selectedTeam === 'TeamD'? false: true }
     teams.push(teamD);
 
+    return teams;
     
   }
 
@@ -64,7 +65,7 @@ const GroupedTeamMembers = ({employees, selectedTeam, setTeam}) => {
        })
       }
     </main>
-  );
+  )
 }
 
 export default GroupedTeamMembers
